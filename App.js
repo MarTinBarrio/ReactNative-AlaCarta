@@ -7,6 +7,7 @@ import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 
 const Stack =  createNativeStackNavigator();
 //creo un obj con 2 propiesdades: Navigator & Screen...
+//agrego coments here!
 
 export default function App() {
   return (
