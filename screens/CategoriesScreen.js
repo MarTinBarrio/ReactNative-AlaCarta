@@ -2,7 +2,6 @@ import { CATEGORIES } from "../data/dummy-data";
 import { FlatList, StyleSheet } from "react-native";
 import CategoryGridTile from "../components/CategoryGridTile";
 
-
 function CategoriesScreen({ navigation }){
 
   function renderCategoryItem(itemData){
@@ -13,10 +12,7 @@ function CategoriesScreen({ navigation }){
       //nombre q registré en el stack
 
       //pero como segundo parámetro lepuedo pasar un obj, con la info a mostrar en esa pag.
-      navigation.navigate('MealsOverview',{
-        categoryId: itemData.item.id,
-        
-      });
+      navigation.navigate('MealsOverview',{categoryId: itemData.item.id,});
     };
   
     return (
@@ -27,7 +23,6 @@ function CategoriesScreen({ navigation }){
         />
     );
   };
-  
 
   return (
     <FlatList
@@ -38,10 +33,10 @@ function CategoriesScreen({ navigation }){
       />
   );
 }
-export default CategoriesScreen;CATEGORIES
+
+export default CategoriesScreen;
 
 const styles = StyleSheet.create({
   list: {
-
   }
 });

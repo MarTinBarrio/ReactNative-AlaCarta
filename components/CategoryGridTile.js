@@ -5,9 +5,8 @@ function CategoryGridTile ({ title, color, onPress }){
     <View style={styles.gridItem}>
       <Pressable
         android_ripple={{color: '#ccc'}}
-        style={({ pressed })=>[
-          styles.button,
-          pressed ? styles.buttonPressed : null]}
+        style={({ pressed })=>[ //pressed lo proporsiona react native al presionara
+          styles.button, pressed ? styles.buttonPressed : null]}
         onPress={onPress}
         >
         <View style={[styles.innerContainer, { backgroundColor: color }]}>

@@ -8,7 +8,7 @@ import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 const Stack =  createNativeStackNavigator();
 //creo un obj con 2 propiesdades: Navigator & Screen...
 
-//Para la nueva Rama
+//Para la nueva Rama 3
 
 export default function App() {
   return (
