@@ -4,7 +4,7 @@ import { MEALS } from '../data/dummy-data';
 function MealsOverviewScreen(){
   return (
     <View style={styles.container}>  
-      <Text>Maels Overview Screen</Text>
+      <Text>Meals Overview Screen</Text>
     </View>
   );
 
