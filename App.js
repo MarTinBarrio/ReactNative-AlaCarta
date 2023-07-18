@@ -15,7 +15,15 @@ export default function App() {
     <>
       <StatusBar style="dark" />
       <NavigationContainer>
-        <Stack.Navigator>
+
+      <Stack.Navigator >
+
+        {/* 
+        <Stack.Navigator initailRouteName="MealsCategories"> 
+        puedo indicar cual es la página inicial... por medio del prop
+        ó toma la 1er página registrada en <Stack.Screen> como inicial..,
+        https://reactnavigation.org/docs/native-stack-navigator
+        */}
 
           {/* Registro los nombres de las paginas a las q se puede navegar */}
           <Stack.Screen name="MealsCategories" component={CategoriesScreen}/>
