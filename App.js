@@ -2,10 +2,10 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 
-const Stack =  createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 //creo un obj con 2 propiesdades: Navigator & Screen...
 
 //Para la nueva Rama 3
@@ -13,14 +13,47 @@ const Stack =  createNativeStackNavigator();
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: "#351401" },
+            headerTintColor: "white",
+            contentStyle: { backgroundColor: "#3f2f25" },
+          }}
+        >
+          {/* 
+        
+        <Stack.Navigator initailRouteName="MealsCategories"> 
+        puedo indicar cual es la página inicial... por medio del prop
+        ó toma la 1er página registrada en <Stack.Screen> como inicial..,
+
+        https://reactnavigation.org/docs/native-stack-navigator
+
+        */}
 
           {/* Registro los nombres de las paginas a las q se puede navegar */}
-          <Stack.Screen name="MealsCategories" component={CategoriesScreen}/>
-          <Stack.Screen name="MealsOverview" component={MealsOverviewScreen}/>
-
+          <Stack.Screen
+            name="MealsCategories"
+            component={CategoriesScreen}
+            options={{
+              //Estas opciones están en docs - https://reactnavigation.org/docs/native-stack-navigator
+              title: "All Categories",
+            }}
+          />
+          <Stack.Screen
+            name="MealsOverview"
+            component={MealsOverviewScreen}
+                      //route & navigation los pasa por default react-navigation
+            //options={({ route, navigation }) => {
+              //route.params.categoryId lo trae del componente screen
+              //const catId = route.params.categoryId;
+              //return {
+                //title: catId,
+              //};
+              
+            //}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

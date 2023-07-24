@@ -8,8 +8,8 @@ function CategoriesScreen({ navigation }){
       //navigation.navigate('MealsOverview');
       //envío el msg del nombre pag a la q quiero navegar
       //nombre q registré en el stack
-      //pero como segundo parámetro lepuedo pasar un obj, con la info a mostrar en esa pag.
-      navigation.navigate('MealsOverview',{categoryId: itemData.item.id,});
+      //pero como segundo parámetro le puedo pasar un obj, con la info a mostrar en esa pag.
+      navigation.navigate('MealsOverview',{ categoryId: itemData.item.id, });
     };
   
     return (
