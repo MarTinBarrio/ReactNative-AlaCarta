@@ -19,6 +19,8 @@ function MealsOverviewScreen({ route, navigation }) {
     const categoryTitle = CATEGORIES.find(
       (category) => category.id === catId
     ).title;
+
+    
     //puedo setear desde aca las opciones de navegación de este compornente.
     navigation.setOptions({
       title: categoryTitle,
@@ -26,7 +28,10 @@ function MealsOverviewScreen({ route, navigation }) {
 
   }, [catId, navigation]);
 
+
+
   function renderMealItem(itemData) {
+
     const item = itemData.item;
 
     const mealItemProps = {
@@ -35,11 +40,12 @@ function MealsOverviewScreen({ route, navigation }) {
       duration: item.duration,
       complexity: item.complexity,
       affordability: item.affordability,
+      id: item.id,
     };
-
+    
     return (
       //<MealItem title={itemData.item.title} imageUrl={itemData.item.imageUrl} duration={itemData.item.duration} complexity={itemData.item.complexity} affordability={itemData.item.affordability}/>
-      <MealItem {...mealItemProps} />
+      <MealItem {...mealItemProps}/>
     );
   }
 
