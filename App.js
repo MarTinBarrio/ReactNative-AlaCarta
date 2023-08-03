@@ -5,27 +5,69 @@ import { Button, StyleSheet } from "react-native";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
+import FavoritesScreen from "./screens/FavoritesScreen";
+import { Ionicons } from "@expo/vector-icons";
+import FavoriteContextProvider from "./store/context/favorites-context";
 
 const Stack = createNativeStackNavigator();
 //creo un obj con 2 propiesdades: Navigator & Screen...
 
-//Para la nueva Rama 3
+const Drawer = createDrawerNavigator();
+
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "#351401" },
+        headerTintColor: "white",
+        sceneContainerStyle: { backgroundColor: "#3f2f25" },
+        drawerContentStyle: { backgroundColor: "#351401" },
+        drawerInactiveTintColor: "white",
+        drawerActiveTintColor: "#351401",
+        drawerActiveBackgroundColor: "#e4baa1",
+      }}
+    >
+      <Drawer.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{
+          title: "All Categories",
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Favorites"
+        component={FavoritesScreen}
+        options={{
+          //title: 'All Categories',
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="star" color={color} size={size} />
+          ),
+        }}
+      />
+    </Drawer.Navigator>
+  );
+}
 
 export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: "#351401" },
-            headerTintColor: "white",
-            contentStyle: { backgroundColor: "#3f2f25" },
-          }}
-        >
-          {/* 
+      <FavoriteContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: "#351401" },
+              headerTintColor: "white",
+              contentStyle: { backgroundColor: "#3f2f25" },
+            }}
+          >
+            {/* 
         
           <Stack.Navigator initailRouteName="MealsCategories"> 
           puedo indicar cual es la página inicial... por medio del prop
@@ -35,47 +77,48 @@ export default function App() {
 
           */}
 
-          {/* Registro los nombres de las paginas a las q se puede navegar */}
+            {/* Registro los nombres de las paginas a las q se puede navegar */}
 
-          <Stack.Screen
-            name="MealsCategories"
-            component={CategoriesScreen}
-            options={{
-              //Estas opciones están en docs - https://reactnavigation.org/docs/native-stack-navigator
-              title: "All Categories",
-            }}
-          />
+            <Stack.Screen
+              name="Drawer"
+              component={DrawerNavigator}
+              options={{
+                //Estas opciones están en docs - https://reactnavigation.org/docs/native-stack-navigator
+                headerShown: false, //oculto el header xq tengo el header en la navagación del drawer
+                //title: "All Categories",
+              }}
+            />
 
-          <Stack.Screen
-            name="MealsOverview"
-            component={MealsOverviewScreen}
-                      //route & navigation los pasa por default react-navigation
-            //options={({ route, navigation }) => {
+            <Stack.Screen
+              name="MealsOverview"
+              component={MealsOverviewScreen}
+              //route & navigation los pasa por default react-navigation
+              //options={({ route, navigation }) => {
               //route.params.categoryId lo trae del componente screen
               //const catId = route.params.categoryId;
               //return {
-                //title: catId,
+              //title: catId,
               //};
-              
-            //}}
-          />
 
-          <Stack.Screen
-            name="MealDetail"
-            component={MealDetailScreen}
+              //}}
+            />
 
-            // options={{
-            //   headerRight: ()=>{
-            //     return <Button title="Tap Me!" onPress={(null)}></Button>
-            //   },
-            // }} //se pueden agregar opciones de esta forma, y con ellas
-                  //agregar un boton, pero lo recomandable es hacer desde el
-                  //componente utilizando el hooks navigation            
-
-          />
-
-        </Stack.Navigator>
-      </NavigationContainer>
+            <Stack.Screen
+              name="MealDetail"
+              component={MealDetailScreen}
+              options={{
+                title: "About the meal",
+                //   headerRight: ()=>{
+                //     return <Button title="Tap Me!" onPress={(null)}></Button>
+                //   },
+              }}
+              //se pueden agregar opciones de esta forma, y con ellas
+              //agregar un boton, pero lo recomandable es hacer desde el
+              //componente utilizando el hooks navigation
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavoriteContextProvider>
     </>
   );
 }
