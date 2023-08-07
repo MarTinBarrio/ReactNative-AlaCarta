@@ -1,5 +1,8 @@
 import { createContext, useState } from "react";
 
+//https://es.legacy.reactjs.org/docs/context.html
+//https://react.dev/reference/react/createContext
+
 export const FavoritesContext = createContext({
   id: [],
   addFavorite: (id) => {},

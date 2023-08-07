@@ -1,28 +1,44 @@
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
-import { useContext, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
 import IconButton from "../components/IconButton";
-import { FavoritesContext } from "../store/context/favorites-context";
+import { useDispatch, useSelector } from "react-redux";
+//import { FavoritesContext } from "../store/context/favorites-context";
+import { removeFavorite, addFavorite } from '../store/redux/favorites'
 
 function MealDetailScreen({ route, navigation }) {
 
-  const favoriteMealsCtx = useContext(FavoritesContext)
+  //const favoriteMealsCtx = useContext(FavoritesContext)
+
+  const favoriteMealIds = useSelector ((state)=> state.favoriteMeals.ids );
+  //state is provides by redux.
+  //state accede al key favoriteMeals: q está en store.js y ese accede al reducer + state q pusimos en favorites.js
+  const dispatch = useDispatch();
 
   const mealId = route.params.mealId;
-
+  
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-  const mealsFavorite = favoriteMealsCtx.ids.includes(mealId);
+  //const mealsFavorite = favoriteMealsCtx.ids.includes(mealId);
+  const mealsFavorite = favoriteMealIds.includes(mealId);
 
   function changeFavoriteStatusHandler() {
     //console.log("Pressed!");
-    mealsFavorite ? favoriteMealsCtx.removeFavorite(mealId) : favoriteMealsCtx.addFavorite(mealId);
+    if(mealsFavorite){
+      //favoriteMealsCtx.removeFavorite(mealId)
+      dispatch(removeFavorite({id: mealId}));
+    }else{
+      //favoriteMealsCtx.addFavorite(mealId);
+      dispatch(addFavorite({id: mealId}));
+    }
   }
 
-  //console.log(selectedMeal);
+  console.log(selectedMeal);
+
+
   //puedo setear desde aca las opciones de navegación de este compornente.
   useLayoutEffect(() => {
     navigation.setOptions({
